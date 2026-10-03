@@ -65,14 +65,31 @@ button:hover {
     transform: scale(1.07);
 }
 
-.no-btn {
-    background: rgba(255,255,255,0.75);
+/* Floating hearts */
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 22px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.7;
+    pointer-events: none;
 }
 
-.progress {
-    margin-top: 15px;
-    font-size: 15px;
-    opacity: 0.9;
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+    }
 }
 
 /* Quiz */
@@ -94,6 +111,12 @@ button:hover {
     color: #9b1c1c;
 }
 
+.progress {
+    margin-top: 15px;
+    font-size: 15px;
+    opacity: 0.9;
+}
+
 /* Envelope */
 
 .envelope {
@@ -107,7 +130,7 @@ button:hover {
     transform: scale(1.12) rotate(-3deg);
 }
 
-/* Surprise 3 */
+/* Memory boxes */
 
 .memory-container {
     display: grid;
@@ -158,46 +181,79 @@ button:hover {
     display: block;
 }
 
-.memory-reveal h3 {
-    margin-top: 0;
-    font-size: 23px;
+/* Mystery boxes */
+
+.mystery-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 30px;
 }
 
-.locked {
+.mystery-box {
+    min-height: 170px;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.18);
+    border: 2px solid rgba(255,255,255,0.45);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.35s;
+    padding: 15px;
+}
+
+.mystery-box:hover {
+    transform: translateY(-8px) scale(1.04);
+    background: rgba(255,255,255,0.3);
+}
+
+.mystery-icon {
+    font-size: 60px;
+    margin-bottom: 10px;
+}
+
+.mystery-title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.mystery-box.opened {
     opacity: 0.45;
+    transform: scale(0.95);
     pointer-events: none;
 }
 
-.next-hidden {
+.mystery-reveal {
+    display: none;
+    margin-top: 25px;
+    padding: 25px;
+    border-radius: 22px;
+    background: rgba(255,255,255,0.22);
+    animation: popIn 0.5s ease;
+}
+
+.mystery-reveal.show {
+    display: block;
+}
+
+.mystery-reveal h3 {
+    font-size: 25px;
+    margin-top: 0;
+}
+
+.hidden {
     display: none;
 }
 
-/* Floating hearts */
-
-.heart {
-    position: fixed;
-    bottom: -30px;
-    font-size: 22px;
-    animation: floatUp 6s linear infinite;
-    opacity: 0.7;
-    pointer-events: none;
+.unlock-message {
+    margin-top: 20px;
+    font-size: 19px;
+    animation: popIn 0.6s ease;
 }
 
-@keyframes floatUp {
-    0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-    }
-
-    20% {
-        opacity: 0.8;
-    }
-
-    100% {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-    }
-}
+/* Animations */
 
 @keyframes fadeIn {
     from {
@@ -223,7 +279,7 @@ button:hover {
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
 
     .card {
         padding: 28px 17px;
@@ -252,6 +308,14 @@ button:hover {
     .memory-icon {
         font-size: 42px;
     }
+
+    .mystery-container {
+        grid-template-columns: 1fr;
+    }
+
+    .mystery-box {
+        min-height: 140px;
+    }
 }
 </style>
 </head>
@@ -265,12 +329,19 @@ button:hover {
 /* Floating hearts */
 
 function createHeart() {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = Math.random() > 0.5 ? "❤️" : "💗";
 
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+    const heart = document.createElement("div");
+
+    heart.className = "heart";
+
+    heart.innerHTML =
+        Math.random() > 0.5 ? "❤️" : "💗";
+
+    heart.style.left =
+        Math.random() * 100 + "vw";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 4) + "s";
 
     document.body.appendChild(heart);
 
@@ -285,7 +356,9 @@ setInterval(createHeart, 700);
 /* Opening */
 
 function startPage() {
+
     document.getElementById("app").innerHTML = `
+
         <h1>Hi Cutie Pattootie 🥺❤️</h1>
 
         <p>
@@ -296,19 +369,31 @@ function startPage() {
             There's something waiting for you inside... 👀💗
         </p>
 
-        <h2>Do you want to continue? 👀❤️</h2>
+        <h2>
+            Do you want to continue? 👀❤️
+        </h2>
 
-        <button onclick="startJourney()">YES ❤️</button>
-        <button class="no-btn" onclick="noButton()">NO 😌</button>
+        <button onclick="startJourney()">
+            YES ❤️
+        </button>
+
+        <button onclick="noButton()">
+            NO 😌
+        </button>
     `;
 }
 
+
 function startJourney() {
+
     showQuizIntro();
 }
 
+
 function noButton() {
+
     document.getElementById("app").innerHTML = `
+
         <h1>Hehe nice try! 😭❤️</h1>
 
         <p>
@@ -323,7 +408,9 @@ function noButton() {
             There's no escape from Andhuu's Heart. 😌💗
         </p>
 
-        <button onclick="showQuizIntro()">Okay fine 😭❤️</button>
+        <button onclick="showQuizIntro()">
+            Okay fine 😭❤️
+        </button>
     `;
 }
 
@@ -331,80 +418,102 @@ function noButton() {
 /* Quiz Intro */
 
 function showQuizIntro() {
+
     document.getElementById("app").innerHTML = `
+
         <h1>Surprise 1 👀❤️</h1>
 
-        <h2>How well do you know Andhuu? 🥺</h2>
+        <h2>
+            How well do you know Andhuu? 🥺
+        </h2>
 
         <p>
             Let's see if you can answer these questions correctly. 😌❤️
         </p>
 
         <p>
-            Don't worry... I think you already know the answers. 👀😂
+            Don't worry...
+            I think you already know the answers. 👀😂
         </p>
 
-        <button onclick="startQuiz()">Start Quiz ❤️</button>
+        <button onclick="startQuiz()">
+            Start Quiz ❤️
+        </button>
     `;
 }
 
 
-/* Quiz Questions */
+/* Quiz */
 
 const questions = [
 
     {
-        question: "Who is the most special person in Andhuu's heart? 🥺❤️",
+        question:
+            "Who is the most special person in Andhuu's heart? 🥺❤️",
+
         options: [
             "His friends 😂",
             "His phone 📱",
             "Kenzaaa ❤️",
             "Food 🍕"
         ],
+
         answer: 2
     },
 
     {
-        question: "Who can make Andhuu smile even on his worst days? 🥹❤️",
+        question:
+            "Who can make Andhuu smile even on his worst days? 🥹❤️",
+
         options: [
             "Kenzaaa ❤️",
             "A good nap 😴",
             "A new phone 📱",
             "Money 💰"
         ],
+
         answer: 0
     },
 
     {
-        question: "Who would Andhuu choose to spend his happiest moments with? 👀❤️",
+        question:
+            "Who would Andhuu choose to spend his happiest moments with? 👀❤️",
+
         options: [
             "His friends 😂",
             "Food 🍗",
             "His phone 📱",
             "Kenzaaa ❤️"
         ],
+
         answer: 3
     },
 
     {
-        question: "Who has a permanent place inside Andhuu's heart? 💗",
+        question:
+            "Who has a permanent place inside Andhuu's heart? 💗",
+
         options: [
             "Nobody 😭",
             "His favourite celebrity ⭐",
             "Kenzaaa ❤️",
             "His gaming squad 🎮"
         ],
+
         answer: 2
     },
 
     {
-        question: "FINAL QUESTION... Who is the MOST OBVIOUS answer to everything in Andhuu's heart? 😭❤️",
+        question:
+            "FINAL QUESTION... Who is the MOST OBVIOUS answer to everything in Andhuu's heart? 😭❤️",
+
         options: [
             "Food 🍕",
             "Money 💰",
             "His phone 📱",
             "Obviously Kenzaaa ❤️"
         ],
+
         answer: 3
     }
 
@@ -414,16 +523,15 @@ let currentQuestion = 0;
 let score = 0;
 
 
-/* Start Quiz */
-
 function startQuiz() {
+
     currentQuestion = 0;
+
     score = 0;
+
     showQuestion();
 }
 
-
-/* Show Question */
 
 function showQuestion() {
 
@@ -434,36 +542,44 @@ function showQuestion() {
     q.options.forEach((option, index) => {
 
         optionsHTML += `
+
             <button
                 class="quiz-option"
                 onclick="answer(${index})"
                 id="option${index}">
+
                 ${option}
+
             </button>
         `;
     });
 
     document.getElementById("app").innerHTML = `
-        <h1>How well do you know Andhuu? 👀❤️</h1>
 
-        <h2>${q.question}</h2>
+        <h1>
+            How well do you know Andhuu? 👀❤️
+        </h1>
+
+        <h2>
+            ${q.question}
+        </h2>
 
         ${optionsHTML}
 
         <div class="progress">
-            Question ${currentQuestion + 1} / ${questions.length}
+            Question ${currentQuestion + 1} /
+            ${questions.length}
         </div>
     `;
 }
 
 
-/* Answer */
-
 function answer(selected) {
 
     const q = questions[currentQuestion];
 
-    const buttons = document.querySelectorAll(".quiz-option");
+    const buttons =
+        document.querySelectorAll(".quiz-option");
 
     buttons.forEach(button => {
         button.disabled = true;
@@ -473,7 +589,8 @@ function answer(selected) {
 
         score++;
 
-        buttons[selected].classList.add("correct");
+        buttons[selected]
+            .classList.add("correct");
 
         setTimeout(() => {
             nextQuestion();
@@ -481,8 +598,11 @@ function answer(selected) {
 
     } else {
 
-        buttons[selected].classList.add("wrong");
-        buttons[q.answer].classList.add("correct");
+        buttons[selected]
+            .classList.add("wrong");
+
+        buttons[q.answer]
+            .classList.add("correct");
 
         setTimeout(() => {
             nextQuestion();
@@ -491,28 +611,32 @@ function answer(selected) {
 }
 
 
-/* Next Question */
-
 function nextQuestion() {
 
     currentQuestion++;
 
     if (currentQuestion < questions.length) {
+
         showQuestion();
+
     } else {
+
         finishQuiz();
     }
 }
 
 
-/* Finish Quiz */
-
 function finishQuiz() {
 
     document.getElementById("app").innerHTML = `
-        <h1>Quiz Complete! 🎉❤️</h1>
 
-        <h2>${score} / ${questions.length} correct 🥺</h2>
+        <h1>
+            Quiz Complete! 🎉❤️
+        </h1>
+
+        <h2>
+            ${score} / ${questions.length} correct 🥺
+        </h2>
 
         <p>
             And honestly...
@@ -522,7 +646,9 @@ function finishQuiz() {
             The answer was always...
         </p>
 
-        <h1>Kenzaaa. 🥺❤️</h1>
+        <h1>
+            Kenzaaa. 🥺❤️
+        </h1>
 
         <button onclick="nextSurprise()">
             Next Surprise 👀❤️
@@ -536,12 +662,21 @@ function finishQuiz() {
 function nextSurprise() {
 
     document.getElementById("app").innerHTML = `
-        <h1>Surprise 2 💌</h1>
 
-        <h2>There's something waiting for you...</h2>
+        <h1>
+            Surprise 2 💌
+        </h1>
 
-        <div class="envelope" onclick="openEnvelope()">
+        <h2>
+            There's something waiting for you...
+        </h2>
+
+        <div
+            class="envelope"
+            onclick="openEnvelope()">
+
             💌
+
         </div>
 
         <p>
@@ -551,12 +686,13 @@ function nextSurprise() {
 }
 
 
-/* Open Envelope */
-
 function openEnvelope() {
 
     document.getElementById("app").innerHTML = `
-        <h1>Kenzaaa ❤️</h1>
+
+        <h1>
+            Kenzaaa ❤️
+        </h1>
 
         <p>
             If you're reading this...
@@ -570,7 +706,8 @@ function openEnvelope() {
 
         <p>
             You are not just a name on this screen.
-            You're the reason I wanted to make this whole little journey. ❤️
+            You're the reason I wanted to make this whole
+            little journey. ❤️
         </p>
 
         <p>
@@ -585,7 +722,7 @@ function openEnvelope() {
 }
 
 
-/* SURPRISE 3 */
+/* Surprise 3 */
 
 let memoriesOpened = 0;
 
@@ -593,22 +730,30 @@ const memories = [
 
     {
         title: "A Little Thought 💭",
-        message: "Some memories may look small from the outside... but when they involve you, they become special to me. 🥺❤️"
+
+        message:
+            "Some memories may look small from the outside... but when they involve you, they become special to me. 🥺❤️"
     },
 
     {
         title: "Something Special 🥹",
-        message: "My favourite part of so many moments isn't what happened... it's the fact that you were there. 💗"
+
+        message:
+            "My favourite part of so many moments isn't what happened... it's the fact that you were there. 💗"
     },
 
     {
         title: "Our Silly Side 😂",
-        message: "Even the random, silly and completely unnecessary moments become memories I would happily experience again with you. 😂❤️"
+
+        message:
+            "Even the random, silly and completely unnecessary moments become memories I would happily experience again with you. 😂❤️"
     },
 
     {
         title: "One Simple Truth ❤️",
-        message: "No matter how many surprises I make, there's always one person behind the reason I made them. Kenzaaa. ❤️"
+
+        message:
+            "No matter how many surprises I make, there's always one person behind the reason I made them. Kenzaaa. ❤️"
     }
 
 ];
@@ -619,9 +764,14 @@ function surpriseThree() {
     memoriesOpened = 0;
 
     document.getElementById("app").innerHTML = `
-        <h1>Surprise 3 📸❤️</h1>
 
-        <h2>Our Little Memories 🥺</h2>
+        <h1>
+            Surprise 3 📸❤️
+        </h1>
+
+        <h2>
+            Our Little Memories 🥺
+        </h2>
 
         <p>
             Okay Kenzaaa...
@@ -629,50 +779,101 @@ function surpriseThree() {
         </p>
 
         <p>
-            <b>Open all 4 boxes. 🎁❤️</b>
+            <b>
+                Open all 4 boxes. 🎁❤️
+            </b>
         </p>
 
         <div class="memory-container">
 
-            <div class="memory-box" onclick="openMemory(0)" id="memory0">
-                <div class="memory-icon">🎁</div>
-                <div class="memory-title">A Little Thought</div>
+            <div
+                class="memory-box"
+                onclick="openMemory(0)"
+                id="memory0">
+
+                <div class="memory-icon">
+                    🎁
+                </div>
+
+                <div class="memory-title">
+                    A Little Thought
+                </div>
+
             </div>
 
-            <div class="memory-box" onclick="openMemory(1)" id="memory1">
-                <div class="memory-icon">💌</div>
-                <div class="memory-title">Something Special</div>
+
+            <div
+                class="memory-box"
+                onclick="openMemory(1)"
+                id="memory1">
+
+                <div class="memory-icon">
+                    💌
+                </div>
+
+                <div class="memory-title">
+                    Something Special
+                </div>
+
             </div>
 
-            <div class="memory-box" onclick="openMemory(2)" id="memory2">
-                <div class="memory-icon">😂</div>
-                <div class="memory-title">Our Silly Side</div>
+
+            <div
+                class="memory-box"
+                onclick="openMemory(2)"
+                id="memory2">
+
+                <div class="memory-icon">
+                    😂
+                </div>
+
+                <div class="memory-title">
+                    Our Silly Side
+                </div>
+
             </div>
 
-            <div class="memory-box" onclick="openMemory(3)" id="memory3">
-                <div class="memory-icon">❤️</div>
-                <div class="memory-title">One Truth</div>
+
+            <div
+                class="memory-box"
+                onclick="openMemory(3)"
+                id="memory3">
+
+                <div class="memory-icon">
+                    ❤️
+                </div>
+
+                <div class="memory-title">
+                    One Truth
+                </div>
+
             </div>
 
         </div>
 
-        <div id="memoryReveal" class="memory-reveal">
+
+        <div
+            id="memoryReveal"
+            class="memory-reveal">
         </div>
 
-        <button id="nextSurpriseButton"
-                class="next-hidden"
-                onclick="surpriseFour()">
+
+        <button
+            id="nextSurpriseButton"
+            class="hidden"
+            onclick="surpriseFour()">
+
             Next Surprise 👀❤️
+
         </button>
     `;
 }
 
 
-/* Open Memory */
-
 function openMemory(index) {
 
-    const box = document.getElementById("memory" + index);
+    const box =
+        document.getElementById("memory" + index);
 
     if (box.classList.contains("locked")) {
         return;
@@ -684,34 +885,44 @@ function openMemory(index) {
 
     const memory = memories[index];
 
-    const reveal = document.getElementById("memoryReveal");
+    const reveal =
+        document.getElementById("memoryReveal");
 
     reveal.innerHTML = `
-        <h3>${memory.title}</h3>
+
+        <h3>
+            ${memory.title}
+        </h3>
 
         <p>
             ${memory.message}
         </p>
 
         <p>
-            ${memoriesOpened < 4
+            ${
+                memoriesOpened < 4
                 ? "There are still more little secrets waiting... 👀❤️"
-                : "You found all four. 🥺❤️"}
+                : "You found all four. 🥺❤️"
+            }
         </p>
     `;
 
     reveal.classList.remove("show");
 
     setTimeout(() => {
+
         reveal.classList.add("show");
+
     }, 50);
+
 
     if (memoriesOpened === 4) {
 
         setTimeout(() => {
 
-            document.getElementById("nextSurpriseButton")
-                .classList.remove("next-hidden");
+            document
+                .getElementById("nextSurpriseButton")
+                .classList.remove("hidden");
 
         }, 500);
     }
@@ -720,28 +931,234 @@ function openMemory(index) {
 
 /* Surprise 4 */
 
+let mysteryOpened = 0;
+
+const mysteryMessages = [
+
+    {
+        title: "A Memory From Andhuu 💭",
+
+        message:
+            "If I could collect every little moment that made me smile because of you, I would probably need an entire website just for them. 🥺❤️"
+    },
+
+    {
+        title: "A Message For You 💌",
+
+        message:
+            "You somehow became one of the most important parts of my little world. And that's something I will always be grateful for. ❤️"
+    },
+
+    {
+        title: "Something From Andhuu ❤️",
+
+        message:
+            "I don't know how many surprises this website will eventually have... but every single one will have one thing in common — you. Kenzaaa. 🥺❤️"
+    }
+
+];
+
+
 function surpriseFour() {
 
+    mysteryOpened = 0;
+
     document.getElementById("app").innerHTML = `
-        <h1>Surprise 4 👀❤️</h1>
 
-        <h2>Something bigger is coming... 🥺</h2>
+        <h1>
+            Surprise 4 🎁❤️
+        </h1>
+
+        <h2>
+            Choose a Mystery Box 👀
+        </h2>
 
         <p>
-            You opened every little memory.
+            Hmm... there are three boxes.
         </p>
 
         <p>
-            But Andhuu's Heart still has more secrets inside it. ❤️
+            But I didn't tell you what's inside. 😌
         </p>
 
         <p>
-            And the next one might be a little more personal... 👀📸
+            Choose one... or open all three. 👀❤️
         </p>
 
-        <button onclick="alert('Surprise 4 is coming next... 👀❤️')">
+
+        <div class="mystery-container">
+
+            <div
+                class="mystery-box"
+                id="mystery0"
+                onclick="openMystery(0)">
+
+                <div class="mystery-icon">
+                    🎁
+                </div>
+
+                <div class="mystery-title">
+                    Box 1
+                </div>
+
+            </div>
+
+
+            <div
+                class="mystery-box"
+                id="mystery1"
+                onclick="openMystery(1)">
+
+                <div class="mystery-icon">
+                    💌
+                </div>
+
+                <div class="mystery-title">
+                    Box 2
+                </div>
+
+            </div>
+
+
+            <div
+                class="mystery-box"
+                id="mystery2"
+                onclick="openMystery(2)">
+
+                <div class="mystery-icon">
+                    ❤️
+                </div>
+
+                <div class="mystery-title">
+                    Box 3
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="mysteryReveal"
+            class="mystery-reveal">
+        </div>
+
+
+        <div
+            id="unlockMessage"
+            class="unlock-message hidden">
+
+            <h2>
+                You opened everything! 😭❤️
+            </h2>
+
+            <p>
+                But there's still something
+                waiting deeper inside Andhuu's Heart... 👀
+            </p>
+
+            <button onclick="surpriseFive()">
+                Go Deeper ❤️
+            </button>
+
+        </div>
+    `;
+}
+
+
+function openMystery(index) {
+
+    const box =
+        document.getElementById("mystery" + index);
+
+    if (box.classList.contains("opened")) {
+        return;
+    }
+
+    box.classList.add("opened");
+
+    mysteryOpened++;
+
+    const mystery =
+        mysteryMessages[index];
+
+    const reveal =
+        document.getElementById("mysteryReveal");
+
+    reveal.innerHTML = `
+
+        <h3>
+            ${mystery.title}
+        </h3>
+
+        <p>
+            ${mystery.message}
+        </p>
+
+        <p>
+            ${
+                mysteryOpened < 3
+                ? "Hmm... there are still boxes left. 👀❤️"
+                : "You opened all three! 🥺❤️"
+            }
+        </p>
+    `;
+
+    reveal.classList.remove("show");
+
+    setTimeout(() => {
+
+        reveal.classList.add("show");
+
+    }, 50);
+
+
+    if (mysteryOpened === 3) {
+
+        setTimeout(() => {
+
+            document
+                .getElementById("unlockMessage")
+                .classList.remove("hidden");
+
+        }, 700);
+    }
+}
+
+
+/* Surprise 5 */
+
+function surpriseFive() {
+
+    document.getElementById("app").innerHTML = `
+
+        <h1>
+            Surprise 5 👀❤️
+        </h1>
+
+        <h2>
+            You found another secret... 🥺
+        </h2>
+
+        <p>
+            Andhuu's Heart isn't finished yet.
+        </p>
+
+        <p>
+            Somewhere inside this little journey,
+            there's something made especially for Kenzaaa. 💗
+        </p>
+
+        <p>
+            <b>
+                The next surprise is going to be different. 👀📸
+            </b>
+        </p>
+
+        <button onclick="alert('The next secret is coming... ❤️👀')">
             Continue ❤️
         </button>
+
     `;
 }
 
