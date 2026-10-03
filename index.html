@@ -22,6 +22,8 @@ body {
     overflow: hidden;
 }
 
+/* Floating hearts */
+
 .heart {
     position: fixed;
     bottom: -40px;
@@ -74,26 +76,41 @@ body {
 
 }
 
+/* Main container */
+
 .container {
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     padding: 25px;
+
     text-align: center;
+
     position: relative;
     z-index: 1;
 }
 
+/* Card */
+
 .card {
     width: 100%;
     max-width: 620px;
+
     padding: 40px 28px;
+
     border-radius: 35px;
+
     background: rgba(255,255,255,0.82);
+
     backdrop-filter: blur(15px);
+
     box-shadow: 0 20px 60px rgba(80,30,70,0.25);
+
     border: 1px solid rgba(255,255,255,0.8);
+
     animation: appear 0.7s ease;
 }
 
@@ -111,6 +128,8 @@ body {
 
 }
 
+/* Text */
+
 h1 {
     color: #d63384;
     font-size: 38px;
@@ -126,6 +145,8 @@ h2 {
     font-size: 20px;
     line-height: 1.8;
 }
+
+/* Big heart */
 
 .heart-big {
     font-size: 65px;
@@ -144,23 +165,34 @@ h2 {
 
 }
 
+/* Buttons */
+
 .answers {
     display: flex;
     flex-direction: column;
     gap: 13px;
+
     margin-top: 28px;
 }
 
 button {
     width: 100%;
+
     padding: 14px 20px;
+
     border: none;
     border-radius: 25px;
+
     background: linear-gradient(90deg, #ff4f9a, #a855f7);
+
     color: white;
+
     font-size: 17px;
+
     cursor: pointer;
+
     transition: 0.25s;
+
     box-shadow: 0 7px 18px rgba(168,85,247,0.25);
 }
 
@@ -173,42 +205,60 @@ button:hover {
 .envelope-area {
     margin: 35px auto;
     cursor: pointer;
+
     width: 220px;
     height: 150px;
+
     position: relative;
 }
 
 .envelope {
     width: 220px;
     height: 140px;
+
     background: #ff6fae;
+
     position: absolute;
     bottom: 0;
+
     border-radius: 10px;
+
     box-shadow: 0 15px 35px rgba(80,30,70,0.25);
+
     transition: 0.4s;
 }
 
 .envelope:before {
     content: "";
+
     position: absolute;
+
     left: 0;
     top: 0;
+
     border-left: 110px solid transparent;
     border-right: 110px solid transparent;
     border-top: 75px solid #ff9ac6;
+
     transform-origin: top;
+
     transition: 0.5s;
+
     z-index: 3;
 }
 
 .envelope:after {
     content: "❤️";
+
     position: absolute;
+
     left: 50%;
     top: 50%;
+
     transform: translate(-50%, -50%);
+
     font-size: 35px;
+
     z-index: 4;
 }
 
@@ -216,14 +266,12 @@ button:hover {
     transform: translateY(-5px) scale(1.04);
 }
 
-.envelope-area:hover:after {
-    content: "💌";
-}
-
 .small-text {
     font-size: 16px;
     color: #8a527b;
 }
+
+/* Mobile */
 
 @media(max-width:600px) {
 
@@ -251,15 +299,20 @@ button:hover {
 
 <body>
 
+<!-- Floating hearts -->
+
 <div class="heart">❤️</div>
 <div class="heart">💕</div>
 <div class="heart">💗</div>
 <div class="heart">💖</div>
 <div class="heart">💞</div>
 
+
 <div class="container">
 
 <div class="card" id="game">
+
+<!-- Opening -->
 
 <div class="heart-big">
 ❤️
@@ -298,7 +351,9 @@ NO 😌
 
 <script>
 
-/* OPENING */
+/* =========================
+   OPENING
+========================= */
 
 function startJourney() {
 
@@ -344,7 +399,9 @@ function noButton() {
 }
 
 
-/* QUIZ INTRO */
+/* =========================
+   QUIZ INTRO
+========================= */
 
 function showQuizIntro() {
 
@@ -379,21 +436,23 @@ function showQuizIntro() {
 }
 
 
-/* QUESTIONS */
+/* =========================
+   QUIZ QUESTIONS
+========================= */
 
 const questions = [
 
 {
-    question: "What makes Andhuu happiest? ❤️",
+    question: "Who is the person Andhuu can never stay mad at for long? 🥺❤️",
 
     answers: [
-        "Food 🍕",
-        "Sleeping 😴",
+        "His best friend 😂",
+        "His phone 📱",
         "Kenzaaa ❤️",
-        "All of the above 😂"
+        "His gym bro 😭"
     ],
 
-    correct: 3
+    correct: 2
 },
 
 {
@@ -426,26 +485,26 @@ const questions = [
     question: "Who gets the biggest smile from Andhuu? 😭❤️",
 
     answers: [
-        "His friends",
-        "His teachers 😂",
+        "His friends 😂",
+        "His teachers 😭",
         "Kenzaaa ❤️",
-        "Nobody 😭"
+        "Nobody 😌"
     ],
 
     correct: 2
 },
 
 {
-    question: "Final question... who does Andhuu love? ❤️",
+    question: "FINAL QUESTION... Who does Andhuu love? ❤️",
 
     answers: [
-        "Kenzaaa ❤️",
-        "Kenzaaa ❤️",
-        "Kenzaaa ❤️",
+        "His favourite food 🍕",
+        "His phone 📱",
+        "His gym 😂",
         "Obviously Kenzaaa 😭❤️"
     ],
 
-    correct: 0
+    correct: 3
 }
 
 ];
@@ -455,7 +514,9 @@ let currentQuestion = 0;
 let score = 0;
 
 
-/* START QUIZ */
+/* =========================
+   START QUIZ
+========================= */
 
 function startQuiz() {
 
@@ -467,7 +528,9 @@ function startQuiz() {
 }
 
 
-/* SHOW QUESTION */
+/* =========================
+   SHOW QUESTION
+========================= */
 
 function showQuestion() {
 
@@ -514,7 +577,9 @@ function showQuestion() {
 }
 
 
-/* ANSWER */
+/* =========================
+   ANSWER
+========================= */
 
 function answer(selected) {
 
@@ -582,7 +647,9 @@ function answer(selected) {
 }
 
 
-/* NEXT */
+/* =========================
+   NEXT QUESTION
+========================= */
 
 function nextQuestion() {
 
@@ -603,7 +670,9 @@ function nextQuestion() {
 }
 
 
-/* QUIZ FINISH */
+/* =========================
+   FINISH QUIZ
+========================= */
 
 function finishQuiz() {
 
@@ -652,7 +721,9 @@ function finishQuiz() {
 }
 
 
-/* SURPRISE 2 */
+/* =========================
+   SURPRISE 2 — ENVELOPE
+========================= */
 
 function nextSurprise() {
 
@@ -695,7 +766,9 @@ function nextSurprise() {
 }
 
 
-/* OPEN ENVELOPE */
+/* =========================
+   OPEN ENVELOPE
+========================= */
 
 function openEnvelope() {
 
@@ -752,7 +825,9 @@ function openEnvelope() {
 }
 
 
-/* SURPRISE 3 */
+/* =========================
+   SURPRISE 3
+========================= */
 
 function surpriseThree() {
 
