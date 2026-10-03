@@ -22,8 +22,6 @@ body {
     overflow: hidden;
 }
 
-/* Floating hearts */
-
 .heart {
     position: fixed;
     bottom: -40px;
@@ -76,19 +74,13 @@ body {
 
 }
 
-/* Main */
-
 .container {
     min-height: 100vh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 25px;
-
     text-align: center;
-
     position: relative;
     z-index: 1;
 }
@@ -96,19 +88,12 @@ body {
 .card {
     width: 100%;
     max-width: 620px;
-
     padding: 40px 28px;
-
     border-radius: 35px;
-
     background: rgba(255,255,255,0.82);
-
     backdrop-filter: blur(15px);
-
     box-shadow: 0 20px 60px rgba(80,30,70,0.25);
-
     border: 1px solid rgba(255,255,255,0.8);
-
     animation: appear 0.7s ease;
 }
 
@@ -126,8 +111,6 @@ body {
 
 }
 
-/* Text */
-
 h1 {
     color: #d63384;
     font-size: 38px;
@@ -143,8 +126,6 @@ h2 {
     font-size: 20px;
     line-height: 1.8;
 }
-
-/* Big heart */
 
 .heart-big {
     font-size: 65px;
@@ -163,34 +144,23 @@ h2 {
 
 }
 
-/* Buttons */
-
 .answers {
     display: flex;
     flex-direction: column;
     gap: 13px;
-
     margin-top: 28px;
 }
 
 button {
     width: 100%;
-
     padding: 14px 20px;
-
     border: none;
     border-radius: 25px;
-
     background: linear-gradient(90deg, #ff4f9a, #a855f7);
-
     color: white;
-
     font-size: 17px;
-
     cursor: pointer;
-
     transition: 0.25s;
-
     box-shadow: 0 7px 18px rgba(168,85,247,0.25);
 }
 
@@ -198,7 +168,62 @@ button:hover {
     transform: scale(1.04);
 }
 
-/* Mobile */
+/* Envelope */
+
+.envelope-area {
+    margin: 35px auto;
+    cursor: pointer;
+    width: 220px;
+    height: 150px;
+    position: relative;
+}
+
+.envelope {
+    width: 220px;
+    height: 140px;
+    background: #ff6fae;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px;
+    box-shadow: 0 15px 35px rgba(80,30,70,0.25);
+    transition: 0.4s;
+}
+
+.envelope:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 75px solid #ff9ac6;
+    transform-origin: top;
+    transition: 0.5s;
+    z-index: 3;
+}
+
+.envelope:after {
+    content: "❤️";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    z-index: 4;
+}
+
+.envelope-area:hover .envelope {
+    transform: translateY(-5px) scale(1.04);
+}
+
+.envelope-area:hover:after {
+    content: "💌";
+}
+
+.small-text {
+    font-size: 16px;
+    color: #8a527b;
+}
 
 @media(max-width:600px) {
 
@@ -226,20 +251,15 @@ button:hover {
 
 <body>
 
-<!-- Floating hearts -->
-
 <div class="heart">❤️</div>
 <div class="heart">💕</div>
 <div class="heart">💗</div>
 <div class="heart">💖</div>
 <div class="heart">💞</div>
 
-
 <div class="container">
 
 <div class="card" id="game">
-
-<!-- Opening screen -->
 
 <div class="heart-big">
 ❤️
@@ -278,9 +298,7 @@ NO 😌
 
 <script>
 
-/* =========================
-   OPENING SCREEN
-========================= */
+/* OPENING */
 
 function startJourney() {
 
@@ -326,9 +344,7 @@ function noButton() {
 }
 
 
-/* =========================
-   QUIZ INTRO
-========================= */
+/* QUIZ INTRO */
 
 function showQuizIntro() {
 
@@ -363,9 +379,7 @@ function showQuizIntro() {
 }
 
 
-/* =========================
-   QUESTIONS
-========================= */
+/* QUESTIONS */
 
 const questions = [
 
@@ -441,9 +455,7 @@ let currentQuestion = 0;
 let score = 0;
 
 
-/* =========================
-   START QUIZ
-========================= */
+/* START QUIZ */
 
 function startQuiz() {
 
@@ -455,9 +467,7 @@ function startQuiz() {
 }
 
 
-/* =========================
-   SHOW QUESTION
-========================= */
+/* SHOW QUESTION */
 
 function showQuestion() {
 
@@ -497,21 +507,14 @@ function showQuestion() {
     });
 
 
-    html += `
-
-        </div>
-
-    `;
-
+    html += `</div>`;
 
     document.getElementById("game").innerHTML = html;
 
 }
 
 
-/* =========================
-   ANSWER
-========================= */
+/* ANSWER */
 
 function answer(selected) {
 
@@ -521,7 +524,6 @@ function answer(selected) {
     if(selected === q.correct) {
 
         score++;
-
 
         document.getElementById("game").innerHTML = `
 
@@ -548,7 +550,6 @@ function answer(selected) {
         `;
 
     }
-
 
     else {
 
@@ -581,14 +582,11 @@ function answer(selected) {
 }
 
 
-/* =========================
-   NEXT QUESTION
-========================= */
+/* NEXT */
 
 function nextQuestion() {
 
     currentQuestion++;
-
 
     if(currentQuestion < questions.length) {
 
@@ -605,9 +603,7 @@ function nextQuestion() {
 }
 
 
-/* =========================
-   FINISH QUIZ
-========================= */
+/* QUIZ FINISH */
 
 function finishQuiz() {
 
@@ -656,13 +652,141 @@ function finishQuiz() {
 }
 
 
-/* =========================
-   TEMPORARY NEXT SURPRISE
-========================= */
+/* SURPRISE 2 */
 
 function nextSurprise() {
 
-    alert("Surprise 2 is coming... 👀❤️");
+    document.getElementById("game").innerHTML = `
+
+        <div class="heart-big">
+        💌
+        </div>
+
+        <h1>
+        You found a secret envelope! 👀
+        </h1>
+
+        <div class="message">
+
+        There's something inside...
+
+        <br><br>
+
+        <strong>
+        But you have to open it yourself. 🥺❤️
+        </strong>
+
+        </div>
+
+        <div class="envelope-area" onclick="openEnvelope()">
+
+            <div class="envelope"></div>
+
+        </div>
+
+        <div class="small-text">
+
+        Tap the envelope 💌
+
+        </div>
+
+    `;
+
+}
+
+
+/* OPEN ENVELOPE */
+
+function openEnvelope() {
+
+    document.getElementById("game").innerHTML = `
+
+        <div class="heart-big">
+        💗
+        </div>
+
+        <h1>
+        A little message for you... 🥺
+        </h1>
+
+        <div class="message">
+
+        Kenzaaa ❤️
+
+        <br><br>
+
+        If you're reading this...
+
+        <br>
+
+        just know that somewhere in this little website,
+
+        <br>
+
+        there is a boy who made every single part of it thinking about you. 🥺
+
+        <br><br>
+
+        You are not just a name on this screen.
+
+        <br>
+
+        You're the reason I wanted to make this whole little journey. ❤️
+
+        <br><br>
+
+        And this isn't even the end...
+
+        👀❤️
+
+        <br><br>
+
+        <button onclick="surpriseThree()">
+        Keep going 👀💗
+        </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* SURPRISE 3 */
+
+function surpriseThree() {
+
+    document.getElementById("game").innerHTML = `
+
+        <div class="heart-big">
+        👀❤️
+        </div>
+
+        <h1>
+        Surprise 3 is waiting... 🥺
+        </h1>
+
+        <div class="message">
+
+        You thought that was everything?
+
+        <br><br>
+
+        Nope. 😂❤️
+
+        <br><br>
+
+        There are still secrets hidden inside Andhuu's Heart.
+
+        <br><br>
+
+        <button onclick="alert('More surprises coming soon... 👀❤️')">
+        Continue ❤️
+        </button>
+
+        </div>
+
+    `;
 
 }
 
