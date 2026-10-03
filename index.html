@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -143,7 +144,7 @@ h2 {
     line-height: 1.8;
 }
 
-/* Heart */
+/* Big heart */
 
 .heart-big {
     font-size: 65px;
@@ -197,14 +198,6 @@ button:hover {
     transform: scale(1.04);
 }
 
-/* Progress */
-
-.progress {
-    font-size: 14px;
-    color: #9b5b89;
-    margin-bottom: 12px;
-}
-
 /* Mobile */
 
 @media(max-width:600px) {
@@ -228,6 +221,7 @@ button:hover {
 }
 
 </style>
+
 </head>
 
 <body>
@@ -245,25 +239,37 @@ button:hover {
 
 <div class="card" id="game">
 
+<!-- Opening screen -->
+
 <div class="heart-big">
-💗
+❤️
 </div>
 
-<h1>How well do you know Andhuu? 👀</h1>
+<h1>
+Hi Cutie Pattootie 🥺❤️
+</h1>
 
 <div class="message">
 
-Let's see if you really know your boy. 😌❤️
+Welcome to <strong>Andhuu's Heart</strong> ❤️
 
 <br><br>
 
-No cheating! 😂
+Do you want to continue? 👀❤️
 
 </div>
 
-<button onclick="startQuiz()">
-I'm Ready ❤️
+<div class="answers">
+
+<button onclick="startJourney()">
+YES ❤️
 </button>
+
+<button onclick="noButton()">
+NO 😌
+</button>
+
+</div>
 
 </div>
 
@@ -272,7 +278,94 @@ I'm Ready ❤️
 
 <script>
 
-/* Questions */
+/* =========================
+   OPENING SCREEN
+========================= */
+
+function startJourney() {
+
+    showQuizIntro();
+
+}
+
+
+function noButton() {
+
+    document.getElementById("game").innerHTML = `
+
+        <div class="heart-big">
+        😂❤️
+        </div>
+
+        <h1>
+        Hehe nice try! 😭❤️
+        </h1>
+
+        <div class="message">
+
+        Sorryyy cutie pattootie... 🥺
+
+        <br><br>
+
+        You must continue. 😂❤️
+
+        <br><br>
+
+        There's no escape from Andhuu's Heart. 😌💗
+
+        <br><br>
+
+        <button onclick="showQuizIntro()">
+        Okay fine 😭❤️
+        </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   QUIZ INTRO
+========================= */
+
+function showQuizIntro() {
+
+    document.getElementById("game").innerHTML = `
+
+        <div class="heart-big">
+        💗
+        </div>
+
+        <h1>
+        How well do you know Andhuu? 👀
+        </h1>
+
+        <div class="message">
+
+        Let's see if you really know your boy. 😌❤️
+
+        <br><br>
+
+        No cheating! 😂
+
+        <br><br>
+
+        <button onclick="startQuiz()">
+        I'm Ready ❤️
+        </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
 
 const questions = [
 
@@ -343,11 +436,14 @@ const questions = [
 
 ];
 
+
 let currentQuestion = 0;
 let score = 0;
 
 
-/* Start */
+/* =========================
+   START QUIZ
+========================= */
 
 function startQuiz() {
 
@@ -359,7 +455,9 @@ function startQuiz() {
 }
 
 
-/* Show question */
+/* =========================
+   SHOW QUESTION
+========================= */
 
 function showQuestion() {
 
@@ -367,49 +465,73 @@ function showQuestion() {
 
     let html = `
 
-        <div class="progress">
+        <div class="message">
+
         Question ${currentQuestion + 1} of ${questions.length}
+
         </div>
 
-        <div class="heart-big">💗</div>
+        <div class="heart-big">
+        💗
+        </div>
 
-        <h2>${q.question}</h2>
+        <h2>
+        ${q.question}
+        </h2>
 
         <div class="answers">
+
     `;
+
 
     q.answers.forEach((answer, index) => {
 
         html += `
+
             <button onclick="answer(${index})">
-                ${answer}
+            ${answer}
             </button>
+
         `;
 
     });
 
-    html += `</div>`;
+
+    html += `
+
+        </div>
+
+    `;
+
 
     document.getElementById("game").innerHTML = html;
 
 }
 
 
-/* Answer */
+/* =========================
+   ANSWER
+========================= */
 
 function answer(selected) {
 
     const q = questions[currentQuestion];
 
+
     if(selected === q.correct) {
 
         score++;
 
+
         document.getElementById("game").innerHTML = `
 
-            <div class="heart-big">💖</div>
+            <div class="heart-big">
+            💖
+            </div>
 
-            <h1>Correct! 😭❤️</h1>
+            <h1>
+            Correct! 😭❤️
+            </h1>
 
             <div class="message">
 
@@ -425,13 +547,20 @@ function answer(selected) {
 
         `;
 
-    } else {
+    }
+
+
+    else {
 
         document.getElementById("game").innerHTML = `
 
-            <div class="heart-big">😂</div>
+            <div class="heart-big">
+            😂
+            </div>
 
-            <h1>Wronggg! 😭</h1>
+            <h1>
+            Wronggg! 😭
+            </h1>
 
             <div class="message">
 
@@ -452,17 +581,22 @@ function answer(selected) {
 }
 
 
-/* Next */
+/* =========================
+   NEXT QUESTION
+========================= */
 
 function nextQuestion() {
 
     currentQuestion++;
 
+
     if(currentQuestion < questions.length) {
 
         showQuestion();
 
-    } else {
+    }
+
+    else {
 
         finishQuiz();
 
@@ -471,19 +605,29 @@ function nextQuestion() {
 }
 
 
-/* Finish */
+/* =========================
+   FINISH QUIZ
+========================= */
 
 function finishQuiz() {
 
     document.getElementById("game").innerHTML = `
 
-        <div class="heart-big">💗</div>
+        <div class="heart-big">
+        💗
+        </div>
 
-        <h1>You finished! 🎉</h1>
+        <h1>
+        You finished! 🎉
+        </h1>
 
         <div class="message">
 
-        Score: <strong>${score}/${questions.length}</strong>
+        Score:
+
+        <strong>
+        ${score}/${questions.length}
+        </strong>
 
         <br><br>
 
@@ -512,7 +656,9 @@ function finishQuiz() {
 }
 
 
-/* Temporary next surprise */
+/* =========================
+   TEMPORARY NEXT SURPRISE
+========================= */
 
 function nextSurprise() {
 
