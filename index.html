@@ -1,1 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Andhuu's Heart ❤️</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg, #ffb6d5, #d8b4fe, #ffc6d9);
+    color: #4b2142;
+    overflow: hidden;
+}
+
+/* Floating hearts */
+
+.heart {
+    position: fixed;
+    bottom: -40px;
+    font-size: 25px;
+    animation: float 8s linear infinite;
+    opacity: 0.7;
+}
+
+.heart:nth-child(1) {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.heart:nth-child(2) {
+    left: 30%;
+    animation-delay: 2s;
+}
+
+.heart:nth-child(3) {
+    left: 50%;
+    animation-delay: 4s;
+}
+
+.heart:nth-child(4) {
+    left: 70%;
+    animation-delay: 1s;
+}
+
+.heart:nth-child(5) {
+    left: 90%;
+    animation-delay: 3s;
+}
+
+@keyframes float {
+
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+
+}
+
+/* Main */
+
+.container {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 25px;
+
+    text-align: center;
+}
+
+.card {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 45px 30px;
+
+    border-radius: 35px;
+
+    background: rgba(255,255,255,0.78);
+
+    backdrop-filter: blur(15px);
+
+    box-shadow: 0 20px 60px rgba(80,30,70,0.25);
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    animation: appear 1s ease;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+}
+
+h1 {
+    color: #d63384;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.message {
+    font-size: 21px;
+    line-height: 1.8;
+}
+
+.heart-big {
+    font-size: 70px;
+    animation: heartbeat 1.5s infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes heartbeat {
+
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
+
+}
+
+button {
+    margin-top: 30px;
+
+    padding: 14px 35px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: linear-gradient(90deg, #ff4f9a, #a855f7);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    box-shadow: 0 8px 20px rgba(168,85,247,0.3);
+
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.07);
+}
+
+@media(max-width:600px) {
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .message {
+        font-size: 18px;
+    }
+
+    .card {
+        padding: 35px 20px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+
+<div class="heart">❤️</div>
+<div class="heart">💕</div>
+<div class="heart">💗</div>
+<div class="heart">💖</div>
+<div class="heart">💞</div>
+
+
+<div class="container">
+
+<div class="card">
+
+<div class="heart-big">
+❤️
+</div>
+
+<h1>Hi Cutie Pattootie 🥺</h1>
+
+<div class="message">
+
+Welcome to<br>
+
+<strong>Andhuu's Heart ❤️</strong>
+
+<br><br>
+
+There's something special waiting for you inside...
+
+</div>
+
+<button onclick="enterHeart()">
+Enter Andhuu's Heart ❤️
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+function enterHeart() {
+
+    alert("Waittt... there's something you need to see first 👀❤️");
+
+}
+
+</script>
+
+</body>
+</html>
