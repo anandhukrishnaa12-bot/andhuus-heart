@@ -21,14 +21,13 @@ body {
     overflow: hidden;
 }
 
-/* Floating hearts */
-
 .heart {
     position: fixed;
     bottom: -40px;
     font-size: 25px;
     animation: float 8s linear infinite;
     opacity: 0.7;
+    z-index: 0;
 }
 
 .heart:nth-child(1) {
@@ -74,8 +73,6 @@ body {
 
 }
 
-/* Main */
-
 .container {
     min-height: 100vh;
 
@@ -86,6 +83,9 @@ body {
     padding: 25px;
 
     text-align: center;
+
+    position: relative;
+    z-index: 1;
 }
 
 .card {
@@ -96,7 +96,7 @@ body {
 
     border-radius: 35px;
 
-    background: rgba(255,255,255,0.78);
+    background: rgba(255,255,255,0.80);
 
     backdrop-filter: blur(15px);
 
@@ -104,7 +104,7 @@ body {
 
     border: 1px solid rgba(255,255,255,0.8);
 
-    animation: appear 1s ease;
+    animation: appear 0.8s ease;
 }
 
 @keyframes appear {
@@ -150,16 +150,20 @@ h1 {
 
 }
 
-button {
+.buttons {
     margin-top: 30px;
 
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+button {
     padding: 14px 35px;
 
     border: none;
 
     border-radius: 30px;
-
-    background: linear-gradient(90deg, #ff4f9a, #a855f7);
 
     color: white;
 
@@ -167,9 +171,19 @@ button {
 
     cursor: pointer;
 
-    box-shadow: 0 8px 20px rgba(168,85,247,0.3);
-
     transition: 0.3s;
+}
+
+.yes {
+    background: linear-gradient(90deg, #ff4f9a, #a855f7);
+
+    box-shadow: 0 8px 20px rgba(168,85,247,0.3);
+}
+
+.no {
+    background: #777;
+
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
 button:hover {
@@ -190,14 +204,21 @@ button:hover {
         padding: 35px 20px;
     }
 
+    .buttons {
+        gap: 12px;
+    }
+
+    button {
+        padding: 13px 27px;
+        font-size: 17px;
+    }
+
 }
 
 </style>
 </head>
 
 <body>
-
-<!-- Floating hearts -->
 
 <div class="heart">❤️</div>
 <div class="heart">💕</div>
@@ -224,13 +245,22 @@ Welcome to<br>
 
 <br><br>
 
-There's something special waiting for you inside...
+Do you want to continue? 👀❤️
 
 </div>
 
-<button onclick="enterHeart()">
-Enter Andhuu's Heart ❤️
+
+<div class="buttons">
+
+<button class="yes" onclick="yesClicked()">
+YES ❤️
 </button>
+
+<button class="no" onclick="noClicked()">
+NO 😌
+</button>
+
+</div>
 
 </div>
 
@@ -239,9 +269,81 @@ Enter Andhuu's Heart ❤️
 
 <script>
 
-function enterHeart() {
+function yesClicked() {
 
-    alert("Waittt... there's something you need to see first 👀❤️");
+    document.querySelector(".card").innerHTML = `
+
+        <div class="heart-big">💗</div>
+
+        <h1>You chose YES! 🥺❤️</h1>
+
+        <div class="message">
+
+        Okayyy cutie pattootie... 👀
+
+        <br><br>
+
+        Welcome inside Andhuu's Heart. ❤️
+
+        <br><br>
+
+        <strong>
+        Your surprises are waiting...
+        </strong>
+
+        <br><br>
+
+        <button class="yes" onclick="nextSurprise()">
+        Continue ❤️
+        </button>
+
+        </div>
+
+    `;
+
+}
+
+function noClicked() {
+
+    document.querySelector(".card").innerHTML = `
+
+        <div class="heart-big">🥺</div>
+
+        <h1>Hehe nice try! 😭❤️</h1>
+
+        <div class="message">
+
+        Sorryyy cutie pattootie...
+
+        <br><br>
+
+        You must continue. 😂❤️
+
+        <br><br>
+
+        There's no escape from Andhuu's Heart. 😌💗
+
+        <br><br>
+
+        <button class="yes" onclick="continueAnyway()">
+        Okay fine 😭❤️
+        </button>
+
+        </div>
+
+    `;
+
+}
+
+function continueAnyway() {
+
+    yesClicked();
+
+}
+
+function nextSurprise() {
+
+    alert("Surprise section coming next! 👀❤️");
 
 }
 
