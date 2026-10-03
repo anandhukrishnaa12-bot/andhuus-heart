@@ -6,20 +6,26 @@
 <title>Andhuu's Heart ❤️</title>
 
 <style>
+
 * {
     box-sizing: border-box;
 }
 
+html,
 body {
     margin: 0;
+    min-height: 100%;
+}
+
+body {
     min-height: 100vh;
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #ff758c, #ff7eb3, #a18cd1);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow-x: hidden;
     color: white;
+    overflow-x: hidden;
 }
 
 .card {
@@ -32,6 +38,8 @@ body {
     box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     text-align: center;
     animation: fadeIn 0.8s ease;
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
@@ -69,7 +77,8 @@ button:hover {
     display: none;
 }
 
-/* Floating hearts */
+
+/* FLOATING HEARTS */
 
 .heart {
     position: fixed;
@@ -78,6 +87,7 @@ button:hover {
     animation: floatUp 6s linear infinite;
     opacity: 0.7;
     pointer-events: none;
+    z-index: 1;
 }
 
 @keyframes floatUp {
@@ -97,7 +107,8 @@ button:hover {
     }
 }
 
-/* Quiz */
+
+/* QUIZ */
 
 .quiz-option {
     display: block;
@@ -122,7 +133,8 @@ button:hover {
     opacity: 0.9;
 }
 
-/* Envelope */
+
+/* ENVELOPE */
 
 .envelope {
     font-size: 90px;
@@ -135,7 +147,8 @@ button:hover {
     transform: scale(1.12) rotate(-3deg);
 }
 
-/* Memory boxes */
+
+/* MEMORY BOXES */
 
 .memory-container {
     display: grid;
@@ -186,7 +199,8 @@ button:hover {
     animation: popIn 0.5s ease;
 }
 
-/* Mystery boxes */
+
+/* MYSTERY BOXES */
 
 .mystery-container {
     display: grid;
@@ -253,6 +267,7 @@ button:hover {
     animation: popIn 0.6s ease;
 }
 
+
 /* PHOTO GALLERY */
 
 .gallery {
@@ -308,11 +323,501 @@ button:hover {
     animation: popIn 0.7s ease;
 }
 
-.final-message h2 {
-    margin-top: 0;
+
+/* ================================================= */
+/* FINAL HEART WINDOW */
+/* ================================================= */
+
+.final-heart-window {
+
+    position: fixed;
+    inset: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(255,60,110,0.20) 0%,
+        rgba(80,20,70,0.25) 30%,
+        rgba(15,5,25,0.96) 75%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow-y: auto;
+
+    z-index: 9999;
+
+    animation: finalWindowIn 0.8s ease;
 }
 
-/* Animations */
+.final-heart-content {
+
+    width: 92%;
+    max-width: 750px;
+
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    position: relative;
+}
+
+.final-small-title {
+
+    font-size: 15px;
+    letter-spacing: 4px;
+    opacity: 0.8;
+
+    margin-bottom: 15px;
+}
+
+.final-heart-content h1 {
+
+    font-size: 34px;
+
+    text-shadow:
+        0 0 10px rgba(255,100,150,0.8),
+        0 0 25px rgba(255,50,120,0.5);
+}
+
+.final-heart-content p {
+
+    font-size: 18px;
+
+    opacity: 0.9;
+}
+
+
+/* GIANT HEART */
+
+.giant-heart {
+
+    position: relative;
+
+    width: 190px;
+    height: 190px;
+
+    margin: 65px 0 40px;
+
+    transform: rotate(-45deg);
+
+    background: #ff1744;
+
+    cursor: pointer;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 0 15px #ff1744,
+        0 0 35px #ff1744,
+        0 0 70px rgba(255,23,68,0.9),
+        0 0 120px rgba(255,23,68,0.55);
+
+    animation:
+        giantHeartbeat 1.5s ease-in-out infinite;
+
+    transition: 0.4s;
+}
+
+.giant-heart::before,
+.giant-heart::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 190px;
+    height: 190px;
+
+    background: #ff1744;
+
+    border-radius: 50%;
+}
+
+.giant-heart::before {
+
+    top: -95px;
+    left: 0;
+}
+
+.giant-heart::after {
+
+    top: 0;
+    left: 95px;
+}
+
+.giant-heart span {
+
+    position: absolute;
+
+    left: 63px;
+    top: 70px;
+
+    transform: rotate(45deg);
+
+    font-size: 55px;
+
+    z-index: 5;
+
+    filter:
+        drop-shadow(0 0 8px white);
+}
+
+.giant-heart:hover {
+
+    transform:
+        rotate(-45deg)
+        scale(1.12);
+
+    box-shadow:
+        0 0 25px #ff1744,
+        0 0 60px #ff1744,
+        0 0 110px rgba(255,23,68,1),
+        0 0 160px rgba(255,23,68,0.7);
+}
+
+@keyframes giantHeartbeat {
+
+    0%,
+    100% {
+        transform: rotate(-45deg) scale(1);
+    }
+
+    50% {
+        transform: rotate(-45deg) scale(1.08);
+    }
+}
+
+
+/* HEART GLOW */
+
+.heart-glow {
+
+    position: absolute;
+
+    width: 260px;
+    height: 260px;
+
+    left: -35px;
+    top: -35px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,80,130,0.25),
+            transparent 65%
+        );
+
+    filter: blur(15px);
+
+    pointer-events: none;
+}
+
+
+/* TOUCH TEXT */
+
+.touch-heart {
+
+    font-size: 19px !important;
+
+    animation:
+        touchPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes touchPulse {
+
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* FINAL REVEAL */
+
+.reveal-window {
+
+    background:
+        radial-gradient(
+            circle at center top,
+            rgba(255,80,130,0.35),
+            rgba(40,5,35,0.95) 65%
+        );
+}
+
+.heart-reveal-content {
+
+    width: 94%;
+    max-width: 800px;
+
+    padding: 50px 15px 70px;
+
+    text-align: center;
+
+    animation: revealContent 1.2s ease;
+}
+
+.heart-burst {
+
+    font-size: 35px;
+
+    letter-spacing: 12px;
+
+    animation: burstIn 1s ease;
+}
+
+.final-love-title {
+
+    font-size: 34px;
+
+    margin: 20px 0 5px;
+
+    text-shadow:
+        0 0 10px #ff6b9a,
+        0 0 25px #ff1744;
+}
+
+.final-love-subtitle {
+
+    font-size: 19px;
+
+    opacity: 0.9;
+}
+
+
+/* PHOTOS */
+
+.heart-photo-reveal {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+
+    margin: 35px auto;
+
+    width: 100%;
+}
+
+.reveal-photo {
+
+    position: relative;
+
+    padding: 6px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.8),
+            rgba(255,100,150,0.6)
+        );
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.4),
+        0 0 20px rgba(255,70,130,0.25);
+
+    animation: photoReveal 0.8s ease backwards;
+}
+
+.reveal-photo:nth-child(1) {
+    animation-delay: 0.15s;
+}
+
+.reveal-photo:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.reveal-photo:nth-child(3) {
+    animation-delay: 0.45s;
+}
+
+.reveal-photo:nth-child(4) {
+    animation-delay: 0.6s;
+}
+
+.reveal-photo:nth-child(5) {
+    animation-delay: 0.75s;
+}
+
+.reveal-photo:nth-child(6) {
+    animation-delay: 0.9s;
+}
+
+.reveal-photo img {
+
+    width: 100%;
+    height: 210px;
+
+    object-fit: cover;
+
+    display: block;
+
+    border-radius: 19px;
+}
+
+@keyframes photoReveal {
+
+    from {
+        opacity: 0;
+        transform:
+            scale(0.4)
+            rotate(-8deg);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            scale(1)
+            rotate(0);
+    }
+}
+
+
+/* MESSAGE INSIDE HEART */
+
+.final-love-message {
+
+    margin-top: 25px;
+
+    padding: 35px 25px;
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border:
+        1px solid rgba(255,255,255,0.25);
+
+    box-shadow:
+        inset 0 0 30px rgba(255,100,150,0.08),
+        0 15px 40px rgba(0,0,0,0.3);
+
+    animation: messageReveal 1.5s ease;
+}
+
+.tiny-heart {
+
+    font-size: 45px;
+
+    animation:
+        tinyBeat 1.3s infinite;
+}
+
+.final-love-message h2 {
+
+    font-size: 28px;
+
+    margin: 10px 0 20px;
+}
+
+.big-final-text {
+
+    font-size: 32px;
+
+    font-weight: bold;
+
+    margin: 20px 0;
+
+    text-shadow:
+        0 0 10px #ff6b9a,
+        0 0 25px #ff1744;
+}
+
+.final-love-message p {
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+@keyframes tinyBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+
+/* FINAL ANIMATIONS */
+
+@keyframes finalWindowIn {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes revealContent {
+
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes burstIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes messageReveal {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* GENERAL ANIMATIONS */
 
 @keyframes fadeIn {
 
@@ -340,6 +845,9 @@ button:hover {
     }
 }
 
+
+/* MOBILE */
+
 @media (max-width: 600px) {
 
     .card {
@@ -358,6 +866,10 @@ button:hover {
         font-size: 16px;
     }
 
+    .memory-container {
+        grid-template-columns: 1fr;
+    }
+
     .mystery-container {
         grid-template-columns: 1fr;
     }
@@ -365,7 +877,67 @@ button:hover {
     .mystery-box {
         min-height: 140px;
     }
+
+    .giant-heart {
+
+        width: 145px;
+        height: 145px;
+
+        margin-top: 55px;
+    }
+
+    .giant-heart::before,
+    .giant-heart::after {
+
+        width: 145px;
+        height: 145px;
+    }
+
+    .giant-heart::before {
+        top: -72px;
+    }
+
+    .giant-heart::after {
+        left: 72px;
+    }
+
+    .giant-heart span {
+
+        left: 47px;
+        top: 52px;
+
+        font-size: 42px;
+    }
+
+    .heart-photo-reveal {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+
+    .reveal-photo img {
+
+        height: 170px;
+    }
+
+    .final-love-title {
+
+        font-size: 28px;
+    }
+
+    .big-final-text {
+
+        font-size: 27px;
+    }
+
+    .final-love-message {
+
+        padding: 28px 18px;
+    }
 }
+
 </style>
 </head>
 
@@ -373,9 +945,13 @@ button:hover {
 
 <div class="card" id="app"></div>
 
+
 <script>
 
-/* Floating hearts */
+
+/* ========================================= */
+/* FLOATING HEARTS */
+/* ========================================= */
 
 function createHeart() {
 
@@ -395,20 +971,27 @@ function createHeart() {
     document.body.appendChild(heart);
 
     setTimeout(() => {
+
         heart.remove();
+
     }, 8000);
 }
 
 setInterval(createHeart, 700);
 
 
-/* Opening */
+
+/* ========================================= */
+/* OPENING */
+/* ========================================= */
 
 function startPage() {
 
     document.getElementById("app").innerHTML = `
 
-        <h1>Hi Cutie Pattootie 🥺❤️</h1>
+        <h1>
+            Hi Cutie Pattootie 🥺❤️
+        </h1>
 
         <p>
             Welcome to <b>Andhuu's Heart ❤️</b>
@@ -429,12 +1012,15 @@ function startPage() {
         <button onclick="noButton()">
             NO 😌
         </button>
+
     `;
 }
 
 
 function startJourney() {
+
     showQuizIntro();
+
 }
 
 
@@ -442,7 +1028,9 @@ function noButton() {
 
     document.getElementById("app").innerHTML = `
 
-        <h1>Hehe nice try! 😭❤️</h1>
+        <h1>
+            Hehe nice try! 😭❤️
+        </h1>
 
         <p>
             Sorryyy cutie pattootie... 🥺
@@ -459,17 +1047,23 @@ function noButton() {
         <button onclick="showQuizIntro()">
             Okay fine 😭❤️
         </button>
+
     `;
 }
 
 
-/* Quiz Intro */
+
+/* ========================================= */
+/* QUIZ INTRO */
+/* ========================================= */
 
 function showQuizIntro() {
 
     document.getElementById("app").innerHTML = `
 
-        <h1>Surprise 1 👀❤️</h1>
+        <h1>
+            Surprise 1 👀❤️
+        </h1>
 
         <h2>
             How well do you know Andhuu? 🥺
@@ -487,11 +1081,15 @@ function showQuizIntro() {
         <button onclick="startQuiz()">
             Start Quiz ❤️
         </button>
+
     `;
 }
 
 
-/* Quiz */
+
+/* ========================================= */
+/* QUIZ */
+/* ========================================= */
 
 const questions = [
 
@@ -567,22 +1165,27 @@ const questions = [
 
 ];
 
+
 let currentQuestion = 0;
+
 let score = 0;
 
 
 function startQuiz() {
 
     currentQuestion = 0;
+
     score = 0;
 
     showQuestion();
+
 }
 
 
 function showQuestion() {
 
-    const q = questions[currentQuestion];
+    const q =
+        questions[currentQuestion];
 
     let optionsHTML = "";
 
@@ -598,8 +1201,11 @@ function showQuestion() {
                 ${option}
 
             </button>
+
         `;
+
     });
+
 
     document.getElementById("app").innerHTML = `
 
@@ -617,20 +1223,25 @@ function showQuestion() {
             Question ${currentQuestion + 1} /
             ${questions.length}
         </div>
+
     `;
 }
 
 
 function answer(selected) {
 
-    const q = questions[currentQuestion];
+    const q =
+        questions[currentQuestion];
 
     const buttons =
         document.querySelectorAll(".quiz-option");
 
     buttons.forEach(button => {
+
         button.disabled = true;
+
     });
+
 
     if (selected === q.answer) {
 
@@ -640,10 +1251,14 @@ function answer(selected) {
             .classList.add("correct");
 
         setTimeout(() => {
+
             nextQuestion();
+
         }, 700);
 
-    } else {
+    }
+
+    else {
 
         buttons[selected]
             .classList.add("wrong");
@@ -652,8 +1267,11 @@ function answer(selected) {
             .classList.add("correct");
 
         setTimeout(() => {
+
             nextQuestion();
+
         }, 1000);
+
     }
 }
 
@@ -662,13 +1280,19 @@ function nextQuestion() {
 
     currentQuestion++;
 
-    if (currentQuestion < questions.length) {
+    if (
+        currentQuestion <
+        questions.length
+    ) {
 
         showQuestion();
 
-    } else {
+    }
+
+    else {
 
         finishQuiz();
+
     }
 }
 
@@ -700,11 +1324,15 @@ function finishQuiz() {
         <button onclick="nextSurprise()">
             Next Surprise 👀❤️
         </button>
+
     `;
 }
 
 
-/* Surprise 2 */
+
+/* ========================================= */
+/* SURPRISE 2 */
+/* ========================================= */
 
 function nextSurprise() {
 
@@ -729,6 +1357,7 @@ function nextSurprise() {
         <p>
             Tap the envelope 👀❤️
         </p>
+
     `;
 }
 
@@ -765,13 +1394,18 @@ function openEnvelope() {
         <button onclick="surpriseThree()">
             Keep going 👀💗
         </button>
+
     `;
 }
 
 
-/* Surprise 3 */
+
+/* ========================================= */
+/* SURPRISE 3 */
+/* ========================================= */
 
 let memoriesOpened = 0;
+
 
 const memories = [
 
@@ -830,6 +1464,7 @@ function surpriseThree() {
                 Open all 4 boxes. 🎁❤️
             </b>
         </p>
+
 
         <div class="memory-container">
 
@@ -913,6 +1548,7 @@ function surpriseThree() {
             Next Surprise 👀❤️
 
         </button>
+
     `;
 }
 
@@ -920,20 +1556,32 @@ function surpriseThree() {
 function openMemory(index) {
 
     const box =
-        document.getElementById("memory" + index);
+        document.getElementById(
+            "memory" + index
+        );
 
-    if (box.classList.contains("locked")) {
+    if (
+        box.classList.contains("locked")
+    ) {
+
         return;
+
     }
 
     box.classList.add("locked");
 
     memoriesOpened++;
 
-    const memory = memories[index];
+
+    const memory =
+        memories[index];
+
 
     const reveal =
-        document.getElementById("memoryReveal");
+        document.getElementById(
+            "memoryReveal"
+        );
+
 
     reveal.innerHTML = `
 
@@ -952,12 +1600,17 @@ function openMemory(index) {
                 : "You found all four. 🥺❤️"
             }
         </p>
+
     `;
+
 
     reveal.classList.remove("show");
 
+
     setTimeout(() => {
+
         reveal.classList.add("show");
+
     }, 50);
 
 
@@ -966,17 +1619,24 @@ function openMemory(index) {
         setTimeout(() => {
 
             document
-                .getElementById("nextSurpriseButton")
+                .getElementById(
+                    "nextSurpriseButton"
+                )
                 .classList.remove("hidden");
 
         }, 500);
+
     }
 }
 
 
-/* Surprise 4 */
+
+/* ========================================= */
+/* SURPRISE 4 */
+/* ========================================= */
 
 let mysteryOpened = 0;
+
 
 const mysteryMessages = [
 
@@ -1107,6 +1767,7 @@ function surpriseFour() {
             </button>
 
         </div>
+
     `;
 }
 
@@ -1114,21 +1775,32 @@ function surpriseFour() {
 function openMystery(index) {
 
     const box =
-        document.getElementById("mystery" + index);
+        document.getElementById(
+            "mystery" + index
+        );
 
-    if (box.classList.contains("opened")) {
+    if (
+        box.classList.contains("opened")
+    ) {
+
         return;
+
     }
 
     box.classList.add("opened");
 
     mysteryOpened++;
 
+
     const mystery =
         mysteryMessages[index];
 
+
     const reveal =
-        document.getElementById("mysteryReveal");
+        document.getElementById(
+            "mysteryReveal"
+        );
+
 
     reveal.innerHTML = `
 
@@ -1147,12 +1819,17 @@ function openMystery(index) {
                 : "You opened all three! 🥺❤️"
             }
         </p>
+
     `;
+
 
     reveal.classList.remove("show");
 
+
     setTimeout(() => {
+
         reveal.classList.add("show");
+
     }, 50);
 
 
@@ -1161,49 +1838,74 @@ function openMystery(index) {
         setTimeout(() => {
 
             document
-                .getElementById("unlockMessage")
+                .getElementById(
+                    "unlockMessage"
+                )
                 .classList.remove("hidden");
 
         }, 700);
+
     }
 }
 
 
-/* Surprise 5 — PHOTO GALLERY */
+
+/* ========================================= */
+/* SURPRISE 5 — PHOTOS */
+/* ========================================= */
 
 const photos = [
 
     {
-        src: "WhatsApp Image 2026-10-03 at 1.45.40 PM (1).jpeg",
-        message: "One picture... one little moment... and somehow it becomes a memory I want to keep forever. 🥺❤️"
+        src:
+        "WhatsApp Image 2026-10-03 at 1.45.40 PM (1).jpeg",
+
+        message:
+        "One picture... one little moment... and somehow it becomes a memory I want to keep forever. 🥺❤️"
     },
 
     {
-        src: "WhatsApp Image 2026-10-03 at 1.45.40 PM.jpeg",
-        message: "Some photos don't need a perfect caption. Having you in them is already enough. 💗"
+        src:
+        "WhatsApp Image 2026-10-03 at 1.45.40 PM.jpeg",
+
+        message:
+        "Some photos don't need a perfect caption. Having you in them is already enough. 💗"
     },
 
     {
-        src: "WhatsApp Image 2026-10-03 at 1.47.42 PM.jpeg",
-        message: "If I could pause time and keep certain moments forever, I'd definitely keep moments like this. 🥹❤️"
+        src:
+        "WhatsApp Image 2026-10-03 at 1.47.42 PM.jpeg",
+
+        message:
+        "If I could pause time and keep certain moments forever, I'd definitely keep moments like this. 🥹❤️"
     },
 
     {
-        src: "WhatsApp Image 2026-10-03 at 12.00.20 PM.jpeg",
-        message: "A little piece of our story, saved in one picture. 📸❤️"
+        src:
+        "WhatsApp Image 2026-10-03 at 12.00.20 PM.jpeg",
+
+        message:
+        "A little piece of our story, saved in one picture. 📸❤️"
     },
 
     {
-        src: "WhatsApp Image 2026-10-03 at 12.00.21 PM.jpeg",
-        message: "Years from now, I hope these little pictures still make me smile the same way. 🥺💗"
+        src:
+        "WhatsApp Image 2026-10-03 at 12.00.21 PM.jpeg",
+
+        message:
+        "Years from now, I hope these little pictures still make me smile the same way. 🥺💗"
     },
 
     {
-        src: "WhatsApp Image 2026-10-03 at 12.01.53 PM.jpeg",
-        message: "And if someone ever asks me what made these memories special... I'd simply say: Kenzaaa. ❤️"
+        src:
+        "WhatsApp Image 2026-10-03 at 12.01.53 PM.jpeg",
+
+        message:
+        "And if someone ever asks me what made these memories special... I'd simply say: Kenzaaa. ❤️"
     }
 
 ];
+
 
 let currentPhoto = 0;
 
@@ -1213,12 +1915,15 @@ function surpriseFive() {
     currentPhoto = 0;
 
     showPhoto();
+
 }
 
 
 function showPhoto() {
 
-    const photo = photos[currentPhoto];
+    const photo =
+        photos[currentPhoto];
+
 
     document.getElementById("app").innerHTML = `
 
@@ -1234,6 +1939,7 @@ function showPhoto() {
             I wanted to save a few little moments here...
         </p>
 
+
         <div class="gallery">
 
             <div class="photo-frame">
@@ -1245,47 +1951,72 @@ function showPhoto() {
 
             </div>
 
+
             <div class="photo-number">
-                Photo ${currentPhoto + 1} / ${photos.length}
+
+                Photo
+                ${currentPhoto + 1}
+                /
+                ${photos.length}
+
             </div>
 
+
             <div class="photo-message">
+
                 ${photo.message}
+
             </div>
+
 
             <div class="gallery-buttons">
 
                 ${
                     currentPhoto > 0
-                    ? `<button onclick="previousPhoto()">⬅️ Previous</button>`
-                    : ""
+                    ?
+                    `<button onclick="previousPhoto()">
+                        ⬅️ Previous
+                    </button>`
+                    :
+                    ""
                 }
+
 
                 ${
                     currentPhoto < photos.length - 1
-                    ? `<button onclick="nextPhoto()">Next ❤️</button>`
-                    : ""
+                    ?
+                    `<button onclick="nextPhoto()">
+                        Next ❤️
+                    </button>`
+                    :
+                    ""
                 }
 
             </div>
 
         </div>
+
     `;
 }
 
 
 function nextPhoto() {
 
-    if (currentPhoto < photos.length - 1) {
+    if (
+        currentPhoto <
+        photos.length - 1
+    ) {
 
         currentPhoto++;
 
         showPhoto();
+
     }
 
     else {
 
         finalGalleryMessage();
+
     }
 }
 
@@ -1297,6 +2028,7 @@ function previousPhoto() {
         currentPhoto--;
 
         showPhoto();
+
     }
 }
 
@@ -1308,6 +2040,7 @@ function finalGalleryMessage() {
         <h1>
             That's all the pictures... for now. 👀❤️
         </h1>
+
 
         <div class="final-message">
 
@@ -1337,43 +2070,227 @@ function finalGalleryMessage() {
 
         </div>
 
+
         <button onclick="surpriseSix()">
             Find the Final Secret ❤️
         </button>
+
     `;
 }
 
 
-/* Surprise 6 placeholder */
+
+/* ========================================= */
+/* SURPRISE 6 — BIG HEART */
+/* ========================================= */
 
 function surpriseSix() {
 
     document.getElementById("app").innerHTML = `
 
-        <h1>
-            You found it... 👀❤️
-        </h1>
+        <div class="final-heart-window">
 
-        <p>
-            But I'm not revealing it yet. 😌
-        </p>
+            <div class="final-heart-content">
 
-        <p>
-            The biggest surprise is still waiting.
-        </p>
+                <div class="final-small-title">
+                    SURPRISE 6 ❤️
+                </div>
 
-        <h2>
-            ❤️
-        </h2>
 
-        <button onclick="alert('The final reveal is coming... 🥺❤️')">
-            Continue ❤️
-        </button>
+                <h1>
+                    There's something inside my heart...
+                </h1>
+
+
+                <p>
+                    You've come all the way here, Kenzaaa. 🥺
+                </p>
+
+
+                <p>
+                    But I saved one last thing just for you.
+                </p>
+
+
+                <div
+                    class="giant-heart"
+                    onclick="openFinalHeart()">
+
+                    <div class="heart-glow"></div>
+
+                    <span>
+                        ❤️
+                    </span>
+
+                </div>
+
+
+                <p class="touch-heart">
+                    Touch the heart ❤️
+                </p>
+
+            </div>
+
+        </div>
+
     `;
 }
 
 
-/* Start */
+
+/* ========================================= */
+/* FINAL HEART REVEAL */
+/* ========================================= */
+
+function openFinalHeart() {
+
+    document.getElementById("app").innerHTML = `
+
+        <div class="final-heart-window reveal-window">
+
+            <div class="heart-reveal-content">
+
+
+                <div class="heart-burst">
+                    ❤️ 💗 ❤️
+                </div>
+
+
+                <h1 class="final-love-title">
+                    You found what's inside... 🥺
+                </h1>
+
+
+                <p class="final-love-subtitle">
+                    And now there's no secret anymore. ❤️
+                </p>
+
+
+                <div class="heart-photo-reveal">
+
+
+                    <div class="reveal-photo">
+
+                        <img
+                            src="WhatsApp Image 2026-10-03 at 1.45.40 PM (1).jpeg"
+                            alt="Kenza ❤️"
+                        >
+
+                    </div>
+
+
+                    <div class="reveal-photo">
+
+                        <img
+                            src="WhatsApp Image 2026-10-03 at 1.45.40 PM.jpeg"
+                            alt="Kenza ❤️"
+                        >
+
+                    </div>
+
+
+                    <div class="reveal-photo">
+
+                        <img
+                            src="WhatsApp Image 2026-10-03 at 1.47.42 PM.jpeg"
+                            alt="Kenza ❤️"
+                        >
+
+                    </div>
+
+
+                    <div class="reveal-photo">
+
+                        <img
+                            src="WhatsApp Image 2026-10-03 at 12.00.20 PM.jpeg"
+                            alt="Kenza ❤️"
+                        >
+
+                    </div>
+
+
+                    <div class="reveal-photo">
+
+                        <img
+                            src="WhatsApp Image 2026-10-03 at 12.00.21 PM.jpeg"
+                            alt="Kenza ❤️"
+                        >
+
+                    </div>
+
+
+                    <div class="reveal-photo">
+
+                        <img
+                            src="WhatsApp Image 2026-10-03 at 12.01.53 PM.jpeg"
+                            alt="Kenza ❤️"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="final-love-message">
+
+
+                    <div class="tiny-heart">
+                        ❤️
+                    </div>
+
+
+                    <h2>
+                        Inside Andhuu's Heart...
+                    </h2>
+
+
+                    <div class="big-final-text">
+                        There's only Kenzaaa. ❤️
+                    </div>
+
+
+                    <p>
+                        All these little surprises,
+                        every picture,
+                        every word...
+                    </p>
+
+
+                    <p>
+                        They all lead to the same person.
+                    </p>
+
+
+                    <h1>
+                        You. 🥺❤️
+                    </h1>
+
+
+                    <p>
+                        My favourite person.
+                        My little cutie pattootie.
+                        My Kenzaaa. 💗
+                    </p>
+
+
+                    <p>
+                        — Andhuu ❤️
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+}
+
+
+
+/* ========================================= */
+/* START */
+/* ========================================= */
 
 startPage();
 
