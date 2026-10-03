@@ -21,6 +21,8 @@ body {
     overflow: hidden;
 }
 
+/* Floating hearts */
+
 .heart {
     position: fixed;
     bottom: -40px;
@@ -73,6 +75,8 @@ body {
 
 }
 
+/* Main */
+
 .container {
     min-height: 100vh;
 
@@ -90,13 +94,13 @@ body {
 
 .card {
     width: 100%;
-    max-width: 600px;
+    max-width: 620px;
 
-    padding: 45px 30px;
+    padding: 40px 28px;
 
     border-radius: 35px;
 
-    background: rgba(255,255,255,0.80);
+    background: rgba(255,255,255,0.82);
 
     backdrop-filter: blur(15px);
 
@@ -104,14 +108,14 @@ body {
 
     border: 1px solid rgba(255,255,255,0.8);
 
-    animation: appear 0.8s ease;
+    animation: appear 0.7s ease;
 }
 
 @keyframes appear {
 
     from {
         opacity: 0;
-        transform: scale(0.9) translateY(30px);
+        transform: scale(0.9) translateY(25px);
     }
 
     to {
@@ -121,21 +125,29 @@ body {
 
 }
 
+/* Text */
+
 h1 {
     color: #d63384;
-    font-size: 42px;
+    font-size: 38px;
     margin-bottom: 20px;
 }
 
+h2 {
+    color: #d63384;
+    font-size: 30px;
+}
+
 .message {
-    font-size: 21px;
+    font-size: 20px;
     line-height: 1.8;
 }
 
+/* Heart */
+
 .heart-big {
-    font-size: 70px;
+    font-size: 65px;
     animation: heartbeat 1.5s infinite;
-    margin-bottom: 10px;
 }
 
 @keyframes heartbeat {
@@ -150,50 +162,59 @@ h1 {
 
 }
 
-.buttons {
-    margin-top: 30px;
+/* Buttons */
 
+.answers {
     display: flex;
-    justify-content: center;
-    gap: 18px;
+    flex-direction: column;
+    gap: 13px;
+
+    margin-top: 28px;
 }
 
 button {
-    padding: 14px 35px;
+    width: 100%;
+
+    padding: 14px 20px;
 
     border: none;
+    border-radius: 25px;
 
-    border-radius: 30px;
+    background: linear-gradient(90deg, #ff4f9a, #a855f7);
 
     color: white;
 
-    font-size: 18px;
+    font-size: 17px;
 
     cursor: pointer;
 
-    transition: 0.3s;
-}
+    transition: 0.25s;
 
-.yes {
-    background: linear-gradient(90deg, #ff4f9a, #a855f7);
-
-    box-shadow: 0 8px 20px rgba(168,85,247,0.3);
-}
-
-.no {
-    background: #777;
-
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 7px 18px rgba(168,85,247,0.25);
 }
 
 button:hover {
-    transform: scale(1.07);
+    transform: scale(1.04);
 }
+
+/* Progress */
+
+.progress {
+    font-size: 14px;
+    color: #9b5b89;
+    margin-bottom: 12px;
+}
+
+/* Mobile */
 
 @media(max-width:600px) {
 
     h1 {
-        font-size: 32px;
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 25px;
     }
 
     .message {
@@ -201,16 +222,7 @@ button:hover {
     }
 
     .card {
-        padding: 35px 20px;
-    }
-
-    .buttons {
-        gap: 12px;
-    }
-
-    button {
-        padding: 13px 27px;
-        font-size: 17px;
+        padding: 32px 20px;
     }
 
 }
@@ -219,6 +231,8 @@ button:hover {
 </head>
 
 <body>
+
+<!-- Floating hearts -->
 
 <div class="heart">❤️</div>
 <div class="heart">💕</div>
@@ -229,38 +243,27 @@ button:hover {
 
 <div class="container">
 
-<div class="card">
+<div class="card" id="game">
 
 <div class="heart-big">
-❤️
+💗
 </div>
 
-<h1>Hi Cutie Pattootie 🥺</h1>
+<h1>How well do you know Andhuu? 👀</h1>
 
 <div class="message">
 
-Welcome to<br>
-
-<strong>Andhuu's Heart ❤️</strong>
+Let's see if you really know your boy. 😌❤️
 
 <br><br>
 
-Do you want to continue? 👀❤️
+No cheating! 😂
 
 </div>
 
-
-<div class="buttons">
-
-<button class="yes" onclick="yesClicked()">
-YES ❤️
+<button onclick="startQuiz()">
+I'm Ready ❤️
 </button>
-
-<button class="no" onclick="noClicked()">
-NO 😌
-</button>
-
-</div>
 
 </div>
 
@@ -269,32 +272,237 @@ NO 😌
 
 <script>
 
-function yesClicked() {
+/* Questions */
 
-    document.querySelector(".card").innerHTML = `
+const questions = [
+
+{
+    question: "What makes Andhuu happiest? ❤️",
+
+    answers: [
+        "Food 🍕",
+        "Sleeping 😴",
+        "Kenzaaa ❤️",
+        "All of the above 😂"
+    ],
+
+    correct: 3
+},
+
+{
+    question: "Who is the special person inside Andhuu's heart? 👀",
+
+    answers: [
+        "Nobody 😌",
+        "Kenzaaa ❤️",
+        "His phone 📱",
+        "His gym bro 😂"
+    ],
+
+    correct: 1
+},
+
+{
+    question: "What does Andhuu want the most? 🥺",
+
+    answers: [
+        "A million rupees 💰",
+        "A new phone 📱",
+        "Peace with Kenzaaa ❤️",
+        "Unlimited food 🍕"
+    ],
+
+    correct: 2
+},
+
+{
+    question: "Who gets the biggest smile from Andhuu? 😭❤️",
+
+    answers: [
+        "His friends",
+        "His teachers 😂",
+        "Kenzaaa ❤️",
+        "Nobody 😭"
+    ],
+
+    correct: 2
+},
+
+{
+    question: "Final question... who does Andhuu love? ❤️",
+
+    answers: [
+        "Kenzaaa ❤️",
+        "Kenzaaa ❤️",
+        "Kenzaaa ❤️",
+        "Obviously Kenzaaa 😭❤️"
+    ],
+
+    correct: 0
+}
+
+];
+
+let currentQuestion = 0;
+let score = 0;
+
+
+/* Start */
+
+function startQuiz() {
+
+    currentQuestion = 0;
+    score = 0;
+
+    showQuestion();
+
+}
+
+
+/* Show question */
+
+function showQuestion() {
+
+    const q = questions[currentQuestion];
+
+    let html = `
+
+        <div class="progress">
+        Question ${currentQuestion + 1} of ${questions.length}
+        </div>
 
         <div class="heart-big">💗</div>
 
-        <h1>You chose YES! 🥺❤️</h1>
+        <h2>${q.question}</h2>
+
+        <div class="answers">
+    `;
+
+    q.answers.forEach((answer, index) => {
+
+        html += `
+            <button onclick="answer(${index})">
+                ${answer}
+            </button>
+        `;
+
+    });
+
+    html += `</div>`;
+
+    document.getElementById("game").innerHTML = html;
+
+}
+
+
+/* Answer */
+
+function answer(selected) {
+
+    const q = questions[currentQuestion];
+
+    if(selected === q.correct) {
+
+        score++;
+
+        document.getElementById("game").innerHTML = `
+
+            <div class="heart-big">💖</div>
+
+            <h1>Correct! 😭❤️</h1>
+
+            <div class="message">
+
+            You actually know me. 🥺
+
+            <br><br>
+
+            <button onclick="nextQuestion()">
+            Continue ❤️
+            </button>
+
+            </div>
+
+        `;
+
+    } else {
+
+        document.getElementById("game").innerHTML = `
+
+            <div class="heart-big">😂</div>
+
+            <h1>Wronggg! 😭</h1>
+
+            <div class="message">
+
+            Hmm... do you even know Andhuu? 😂❤️
+
+            <br><br>
+
+            <button onclick="nextQuestion()">
+            Try again ❤️
+            </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* Next */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+    if(currentQuestion < questions.length) {
+
+        showQuestion();
+
+    } else {
+
+        finishQuiz();
+
+    }
+
+}
+
+
+/* Finish */
+
+function finishQuiz() {
+
+    document.getElementById("game").innerHTML = `
+
+        <div class="heart-big">💗</div>
+
+        <h1>You finished! 🎉</h1>
 
         <div class="message">
 
-        Okayyy cutie pattootie... 👀
+        Score: <strong>${score}/${questions.length}</strong>
 
         <br><br>
 
-        Welcome inside Andhuu's Heart. ❤️
+        Whether you got everything right or not...
+
+        <br>
+
+        there's one thing you definitely should know. ❤️
 
         <br><br>
 
         <strong>
-        Your surprises are waiting...
+        You're the reason this little website exists. 🥺
         </strong>
 
         <br><br>
 
-        <button class="yes" onclick="nextSurprise()">
-        Continue ❤️
+        <button onclick="nextSurprise()">
+        Next Surprise 👀❤️
         </button>
 
         </div>
@@ -303,47 +511,12 @@ function yesClicked() {
 
 }
 
-function noClicked() {
 
-    document.querySelector(".card").innerHTML = `
-
-        <div class="heart-big">🥺</div>
-
-        <h1>Hehe nice try! 😭❤️</h1>
-
-        <div class="message">
-
-        Sorryyy cutie pattootie...
-
-        <br><br>
-
-        You must continue. 😂❤️
-
-        <br><br>
-
-        There's no escape from Andhuu's Heart. 😌💗
-
-        <br><br>
-
-        <button class="yes" onclick="continueAnyway()">
-        Okay fine 😭❤️
-        </button>
-
-        </div>
-
-    `;
-
-}
-
-function continueAnyway() {
-
-    yesClicked();
-
-}
+/* Temporary next surprise */
 
 function nextSurprise() {
 
-    alert("Surprise section coming next! 👀❤️");
+    alert("Surprise 2 is coming... 👀❤️");
 
 }
 
